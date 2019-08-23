@@ -7,6 +7,10 @@ const initState = {
 }
 
 const bookpostReducer = (state = initState, action) => {
+    switch(action.type){
+        case 'CREATE_BOOKPOST':
+            console.log('created bookpost', action.bookpost) //the bookpost passed on from bookpostActions
+    }
     return state
 }
 
