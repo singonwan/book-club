@@ -5,6 +5,7 @@ import Dashboard from './components/dashboard/Dashboard'
 import BookpostDetail from './components/bookpost/BookpostDetail'
 import SignIn from './components/auth/SignIn'
 import SignUp from './components/auth/SignUp'
+import CreateBookpost from './components/bookpost/CreateBookpost'
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
           <Route path='/bookpost/:id' component={BookpostDetail} />
           <Route path='/signin' component={SignIn} />
           <Route path='/signup' component={SignUp} />
+          <Route path='/create' component={CreateBookpost} />
         </Switch>
       </div>
     </BrowserRouter>
