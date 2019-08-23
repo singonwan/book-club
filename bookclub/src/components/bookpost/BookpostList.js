@@ -1,12 +1,14 @@
 import React from 'react'
 import BookpostSummary from './BookpostSummary'
 
-const BookpostList = () => {
+const BookpostList = ({bookposts}) => {
     return (
         <div className="bookpost-list section">
-            <BookpostSummary />
-            <BookpostSummary />
-            <BookpostSummary />
+            { bookposts && bookposts.map(bookpost => {
+                return(
+                    <BookpostSummary bookpost={bookpost} key={bookpost.id}/>
+                )
+            })}
         </div>
     )
 }
