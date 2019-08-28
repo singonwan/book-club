@@ -17,6 +17,7 @@ class CreateBookpost extends Component {
         e.preventDefault();
         // console.log(this.state);
         this.props.createBookpost(this.state)
+        this.props.history.push('/') //redirect to homepage after creating post
     }
     render() {
         const { auth } = this.props

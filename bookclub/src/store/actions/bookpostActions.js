@@ -7,11 +7,13 @@ export const createBookpost = (bookpost) => {
         //make async call to database ... async calls returns promise so can use .then() .catch()
         //the then(callback function ) 
         const firestore = getFirestore();
+        const profile = getState().firebase.profile;
+        const authorId = getState().firebase.auth.uid;
         firestore.collection("bookposts").add({
             ...bookpost,
-            authorFirstName: 'gwan',
-            authorLastName: 'wan',
-            authorId: 12345,
+            authorFirstName: profile.firstName,
+            authorLastName: profile.lastName,
+            authorId: authorId,
             createdAt: new Date()
         }).then(() => {
             dispatch({ type:'CREATE_BOOKPOST', bookpost }); 
