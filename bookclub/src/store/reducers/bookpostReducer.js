@@ -10,8 +10,13 @@ const bookpostReducer = (state = initState, action) => {
     switch(action.type){
         case 'CREATE_BOOKPOST':
             console.log('created bookpost', action.bookpost) //the bookpost passed on from bookpostActions
+            return state;
+        case 'CREATE_BOOKPOST_ERROR':
+            console.log('create bookpost error', action.err);
+            return state;
+        default: 
+            return state;
     }
-    return state
 }
 
 export default bookpostReducer
