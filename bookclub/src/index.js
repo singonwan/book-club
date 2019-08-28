@@ -16,7 +16,8 @@ const store = createStore(rootReducer,
     compose(
         applyMiddleware(thunk.withExtraArgument({ getFirebase, getFirestore })),
         reduxFirestore(fbConfig),
-        reactReduxFirebase(fbConfig, {attachAuthIsReady: true})
+        reactReduxFirebase(fbConfig, {useFirestoreForProfile: true, userProfile: 'users', attachAuthIsReady: true})
+        //above makes user profile data synch with firestore data as long as same id
     )
 );
 
