@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { createBookpost } from '../../store/actions/bookpostActions'
+import { Redirect } from 'react-router-dom'
 
 class CreateBookpost extends Component {
     state = {
@@ -18,6 +19,9 @@ class CreateBookpost extends Component {
         this.props.createBookpost(this.state)
     }
     render() {
+        const { auth } = this.props
+        if (!auth.uid) return <Redirect to='/signin' /> //route guarding
+
         return (
             <div className="container">
                 <form onSubmit={this.handleSubmit} className="white">
@@ -39,10 +43,16 @@ class CreateBookpost extends Component {
     }
 }
 
+const mapStateToProps = (state) => {
+    return {
+        auth: state.firebase.auth
+    }
+}
+
 const mapDispatchToProps = (dispatch) => { 
     return {
         createBookpost: (bookpost) => dispatch(createBookpost(bookpost))
     }
 }
 
-export default connect(null, mapDispatchToProps)(CreateBookpost)
+export default connect(mapStateToProps, mapDispatchToProps)(CreateBookpost)

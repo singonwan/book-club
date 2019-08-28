@@ -4,10 +4,13 @@ import BookpostList from '../bookpost/BookpostList'
 import { connect } from 'react-redux'
 import { firestoreConnect } from 'react-redux-firebase'
 import { compose } from 'redux'
+import { Redirect } from 'react-router-dom'
 
 class Dashboard extends Component {
     render() {
-        const { bookposts } = this.props;
+        const { bookposts, auth } = this.props;
+        if (!auth.uid) return <Redirect to='/signin' /> //route guarding
+
         return (
             <div className="dashboard container">
                 <div className="row">
@@ -26,7 +29,8 @@ class Dashboard extends Component {
 const mapStateToProps = (state) => {
     //state.bookpost(rootreducer).bookposts(bookpostreducer)
     return {
-        bookposts: state.firestore.ordered.bookposts
+        bookposts: state.firestore.ordered.bookposts,
+        auth: state.firebase.auth
     }
 }
 
