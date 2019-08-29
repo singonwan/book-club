@@ -8,7 +8,7 @@ import { Redirect } from 'react-router-dom'
 
 class Dashboard extends Component {
     render() {
-        const { bookposts, auth } = this.props;
+        const { bookposts, auth, notifications } = this.props;
         if (!auth.uid) return <Redirect to='/signin' /> //route guarding
 
         return (
@@ -18,7 +18,7 @@ class Dashboard extends Component {
                         <BookpostList bookposts={bookposts}/>
                     </div> 
                     <div className="col s12 m5 offset-m1">
-                        <Notifications />
+                        <Notifications notifications={notifications}/>
                     </div>
                 </div>
             </div>
@@ -30,7 +30,8 @@ const mapStateToProps = (state) => {
     //state.bookpost(rootreducer).bookposts(bookpostreducer)
     return {
         bookposts: state.firestore.ordered.bookposts,
-        auth: state.firebase.auth
+        auth: state.firebase.auth,
+        notifications: state.firestore.ordered.notifications
     }
 }
 
@@ -38,6 +39,7 @@ const mapStateToProps = (state) => {
 export default compose(
     connect(mapStateToProps),
     firestoreConnect([
-        { collection: 'bookposts'}
+        { collection: 'bookposts'},
+        { collection: 'notifications', limit: 5}
     ])
 )(Dashboard)
