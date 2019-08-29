@@ -20,11 +20,26 @@ exports.bookpostCreated = functions.firestore
     .onCreate(doc => {
         const bookpost = doc.data();
         const notification = {
-            content: 'added new bookpost',
+            content: 'Added a new bookpost',
             user: `${bookpost.authorFirstName} ${bookpost.authorLastName}`,
             time: admin.firestore.FieldValue.serverTimestamp()
         }
 
     return createNotification(notification)    
-
 })
+
+exports.userJoined = functions.auth.user()
+    .onCreate(user => {
+        return admin.firestore().collection('users')
+            .doc(user.uid).get().then(doc => {
+
+                const newUser = doc.data();
+                const notification = {
+                    content: 'Joined the Bookclub!',
+                    user: `${newUser.firstName} ${newUser.lastName}`,
+                    time: admin.firestore.FieldValue.serverTimestamp()
+                }
+
+                return createNotification(notification)  
+            })
+    })
