@@ -14,6 +14,7 @@ const BookpostDetail = (props) => {
             <div className="container section bookpost-detail">
                 <div className="card z-depth-0">
                     <div className="card-content">
+                        <p align='right'><i class="material-icons">clear</i></p>
                         <span className="card-title">{ bookpost.title }</span>
                         <p>{ bookpost.content }</p>
                     </div>
