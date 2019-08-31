@@ -1,10 +1,9 @@
 import React from 'react'
 
-function DeleteBookpost() {
+function DeleteBookpost(props) {
+
     return (
-        <div>
-            
-        </div>
+        <p align='right'> <i class="material-icons">clear</i></p> 
     )
 }
 
