@@ -7,7 +7,6 @@ import moment from 'moment'
 
 const BookpostDetail = (props) => {
 
-    const del = props => <i onClick={this.handleClick} class="material-icons">clear</i>
     const { bookpost, auth } = props;
     if (!auth.uid) return <Redirect to='/signin' /> //route guarding
 
@@ -16,7 +15,6 @@ const BookpostDetail = (props) => {
             <div className="container section bookpost-detail">
                 <div className="card z-depth-0">
                     <div className="card-content">
-                        <p align='right'>{del}</p>
                         <span className="card-title">{ bookpost.title }</span>
                         <p>{ bookpost.content }</p>
                     </div>
