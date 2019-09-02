@@ -13,21 +13,22 @@ class BookpostDetail extends Component {
     }
     render(){
         const { bookpost, auth } = this.props;
-        //needa delete from here
-
-        
+        //needa delete from here //check if authorid to display the crossbtn. ternary operator?
+        //{ authError ? <p>{ authError}</p> : null}
+        //state.firebase.auth.uid == bookpost.authorId
+        const crossbtn = <p align='right' onClick={this.handleClick} ><i className="material-icons">clear</i></p> 
         
         if (!auth.uid) return <Redirect to='/signin' /> //route guarding
-        console.log('details', this.props)
+        //check if user is the author of this post. 
         if (bookpost) {
+            // console.log('bookpost2', bookpost.authorId)
+            // console.log('bookpost', auth.uid)
             return (
                 <div className="container section bookpost-detail">
                     <div className="card z-depth-0">
                         <div className="card-content">
-                            {/* <DeleteBookpost bookpost={bookpost} id={props.match.params.id} /> */}
-                            <p align='right' onClick={this.handleClick} >
-                                <i className="material-icons">clear</i>
-                            </p> 
+                            {/* //{ crossbtn } */}
+                            { auth.uid === bookpost.authorId ? crossbtn : null}
                             <span className="card-title">{ bookpost.title }</span>
                             <p>{ bookpost.content }</p>
                         </div>
@@ -59,7 +60,7 @@ const mapStateToProps = (state, ownProps) => {
 }
 
 const mapDispatchToProps = (dispatch, ownProps) => {
-    const id = ownProps.match.params.id; 
+    //const id = ownProps.match.params.id; 
     return {
         deleteBookpost: (id) => dispatch(deleteBookpost(id))
     }
