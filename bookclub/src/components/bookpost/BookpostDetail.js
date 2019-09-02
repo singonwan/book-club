@@ -4,6 +4,7 @@ import { firestoreConnect } from 'react-redux-firebase'
 import { compose } from 'redux'
 import { Redirect } from 'react-router-dom'
 import moment from 'moment'
+import DeleteBookpost from './DeleteBookpost';
 
 const BookpostDetail = (props) => {
 
@@ -15,6 +16,7 @@ const BookpostDetail = (props) => {
             <div className="container section bookpost-detail">
                 <div className="card z-depth-0">
                     <div className="card-content">
+                        <DeleteBookpost bookpost={bookpost} />
                         <span className="card-title">{ bookpost.title }</span>
                         <p>{ bookpost.content }</p>
                     </div>

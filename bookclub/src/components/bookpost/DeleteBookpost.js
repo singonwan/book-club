@@ -3,8 +3,9 @@ import { connect } from 'react-redux'
 import { deleteBookpost } from '../../store/actions/bookpostActions'
 
 function DeleteBookpost({ bookpost, deleteBookpost }) {
-    //onClick, props.deleteBookpost
-    //problem: clickin on cross means clicking on post too. need to find a solution
+
+    //the bookpost is passed in
+    //delete bookpost and the redirect back to dashboard. 
 
     return (
         <p onClick={() => deleteBookpost(bookpost)} align='right'> <i className="material-icons">clear</i></p> 
