@@ -23,11 +23,14 @@ export const createBookpost = (bookpost) => {
     } //the dispatch calls go to the reducers to be handled
 };
 
-export const deleteBookpost = (bookpost) => {
+export const deleteBookpost = (id) => {
     return (dispatch, getState, {getFirebase, getFirestore}) => {
         const firestore = getFirestore();
-        console.log("deleting bookpost") //this gets fired //but also need to figure out why it redirects
-        //..because clicking on the post redirects.
-        //get id from firestore and match the id with the bookpost passed on. 
+        firestore.collection("bookposts").doc(id).delete()
+            .then(() => {
+                dispatch({ type:'DELETE_BOOKPOST', id});
+            }).catch((err) => {
+                dispatch({ type:'DELETE_BOOKPOST_ERROR', err})
+            })
     }
 }

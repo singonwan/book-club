@@ -1,10 +1,4 @@
-const initState = {
-    bookposts: [
-        {id: '1', title: 'help me find peach', content: 'blah blah blah'},
-        {id: '2', title: 'collect all the stars', content: 'blah blah blah'},
-        {id: '3', title: 'egg hunt with yoshi', content: 'blah blah blah'}
-    ]
-}
+const initState = {}
 
 const bookpostReducer = (state = initState, action) => {
     switch(action.type){
@@ -13,6 +7,12 @@ const bookpostReducer = (state = initState, action) => {
             return state;
         case 'CREATE_BOOKPOST_ERROR':
             console.log('create bookpost error', action.err);
+            return state;
+        case 'DELETE_BOOKPOST':
+            console.log('deleted bookpost', action.id)
+            return state;
+        case 'DELETE_BOOKPOST_ERROR':
+            console.log('deleted bookpost error', action.err)
             return state;
         default: 
             return state;

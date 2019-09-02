@@ -4,6 +4,7 @@ import { createBookpost } from '../../store/actions/bookpostActions'
 import { Redirect } from 'react-router-dom'
 
 class CreateBookpost extends Component {
+    
     state = {
         title:'',
         content:''
@@ -14,12 +15,14 @@ class CreateBookpost extends Component {
         })
     }
     handleSubmit = (e) => {
+        
         e.preventDefault();
         // console.log(this.state);
         this.props.createBookpost(this.state)
         this.props.history.push('/') //redirect to homepage after creating post
     }
     render() {
+        console.log('createbookpost', this.props)
         const { auth } = this.props
         if (!auth.uid) return <Redirect to='/signin' /> //route guarding
 
