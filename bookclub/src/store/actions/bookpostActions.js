@@ -35,23 +35,21 @@ export const deleteBookpost = (id) => {
     }
 }
 
-export const editBookpost = (bookpost) => {
-    //instead of returning an action, we return a function
-    //extra arguments added from thunk
+export const editBookpost = (id) => {
     return (dispatch, getState, {getFirebase, getFirestore}) => {
-        //holding the dispatch and then dispatch after the async call
+        
+        //needa create an editbookpost page like createbookpost with a different state.
+        // pushing that button redirects to that page with content already existing on the thing.
+        // after editing the user can press update button
+        // notification fires and post is changed with a different timestamp too. 
 
-        //make async call to database ... async calls returns promise so can use .then() .catch()
-        //the then(callback function ) 
+
         const firestore = getFirestore();
         const profile = getState().firebase.profile;
         const authorId = getState().firebase.auth.uid;
-        firestore.collection("bookposts").add({
-            ...bookpost,
-            authorFirstName: profile.firstName,
-            authorLastName: profile.lastName,
-            authorId: authorId,
-            createdAt: new Date()
+        firestore.collection("bookposts").doc(id).update({
+            'title': '',
+            'content': 
         }).then(() => {
             dispatch({ type:'EDIT_BOOKPOST', bookpost }); 
         }).catch((err) => {

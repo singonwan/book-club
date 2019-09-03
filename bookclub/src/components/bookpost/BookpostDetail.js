@@ -12,7 +12,7 @@ class BookpostDetail extends Component {
         this.props.history.push('/') 
     }
     handleEditClick = (e) => {
-        this.props.editBookpost()
+        this.props.editBookpost(this.props.match.params.id)
         // this.props.history.push('/')
     }
     render(){
@@ -70,7 +70,7 @@ const mapDispatchToProps = (dispatch, ownProps) => {
     //const id = ownProps.match.params.id; 
     return {
         deleteBookpost: (id) => dispatch(deleteBookpost(id))
-        editBookpost: () => dispatch(editBookpost())
+        editBookpost: (id) => dispatch(editBookpost(id))
     }
 }
 
