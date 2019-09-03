@@ -7,16 +7,21 @@ import moment from 'moment'
 import { deleteBookpost } from '../../store/actions/bookpostActions'
 
 class BookpostDetail extends Component {
-    handleClick = (e) => {
+    handleDeleteClick = (e) => {
         this.props.deleteBookpost(this.props.match.params.id)
         this.props.history.push('/') 
+    }
+    handleEditClick = (e) => {
+        this.props.editBookpost()
+        // this.props.history.push('/')
     }
     render(){
         const { bookpost, auth } = this.props;
         //needa delete from here //check if authorid to display the crossbtn. ternary operator?
         //{ authError ? <p>{ authError}</p> : null}
         //state.firebase.auth.uid == bookpost.authorId
-        const crossbtn = <p align='right' onClick={this.handleClick} ><i className="material-icons">clear</i></p> 
+        const crossbtn = <p align='right' onClick={this.handleDeleteClick} ><i className="material-icons">clear</i></p>
+        const editbtn = <p align='right' onClick={this.handleEditClick} ><i className="material-icons">edit</i></p> 
         
         if (!auth.uid) return <Redirect to='/signin' /> //route guarding
         //check if user is the author of this post. 
@@ -27,10 +32,12 @@ class BookpostDetail extends Component {
                 <div className="container section bookpost-detail">
                     <div className="card z-depth-0">
                         <div className="card-content">
-                            {/* //{ crossbtn } */}
-                            { auth.uid === bookpost.authorId ? crossbtn : null}
-                            <span className="card-title">{ bookpost.title }</span>
-                            <p>{ bookpost.content }</p>
+                                
+                                { auth.uid === bookpost.authorId ? crossbtn : null}
+
+                                <span className="card-title">{ bookpost.title }</span>
+                                <p>{ bookpost.content }</p>
+                                { auth.uid === bookpost.authorId ? editbtn : null}
                         </div>
                         <div className="card-action grey lighten-4 brown-text">
                             <div>Posted by { bookpost.authorFirstName } {bookpost.authorLastName }</div>
@@ -63,6 +70,7 @@ const mapDispatchToProps = (dispatch, ownProps) => {
     //const id = ownProps.match.params.id; 
     return {
         deleteBookpost: (id) => dispatch(deleteBookpost(id))
+        editBookpost: () => dispatch(editBookpost())
     }
 }
 
