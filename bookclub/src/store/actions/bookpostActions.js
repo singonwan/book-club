@@ -42,6 +42,7 @@ export const editBookpost = (id) => {
         // pushing that button redirects to that page with content already existing on the thing.
         // after editing the user can press update button
         // notification fires and post is changed with a different timestamp too. 
+        // may needa create a new edit page or can use create page with input value to prepopulate the textbox
 
 
         const firestore = getFirestore();
