@@ -4,7 +4,10 @@ import { firestoreConnect } from 'react-redux-firebase'
 import { compose } from 'redux'
 import { Redirect } from 'react-router-dom'
 import moment from 'moment'
-import { deleteBookpost } from '../../store/actions/bookpostActions'
+import { deleteBookpost, editBookpost } from '../../store/actions/bookpostActions'
+
+//clicking on edit button should just take to editboookpost page.
+//dispatch action should be called in editbookpost page instead
 
 class BookpostDetail extends Component {
     handleDeleteClick = (e) => {
@@ -69,7 +72,7 @@ const mapStateToProps = (state, ownProps) => {
 const mapDispatchToProps = (dispatch, ownProps) => {
     //const id = ownProps.match.params.id; 
     return {
-        deleteBookpost: (id) => dispatch(deleteBookpost(id))
+        deleteBookpost: (id) => dispatch(deleteBookpost(id)),
         editBookpost: (id) => dispatch(editBookpost(id))
     }
 }

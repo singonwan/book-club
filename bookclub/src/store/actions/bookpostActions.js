@@ -48,13 +48,13 @@ export const editBookpost = (id) => {
         const firestore = getFirestore();
         const profile = getState().firebase.profile;
         const authorId = getState().firebase.auth.uid;
-        firestore.collection("bookposts").doc(id).update({
-            'title': '',
-            'content': 
-        }).then(() => {
-            dispatch({ type:'EDIT_BOOKPOST', bookpost }); 
-        }).catch((err) => {
-            dispatch({ type:'EDIT_BOOKPOST_ERROR', err });
-        })
+        // firestore.collection("bookposts").doc(id).update({
+        //     'title': '',
+        //     'content': 
+        // }).then(() => {
+        //     dispatch({ type:'EDIT_BOOKPOST', bookpost }); 
+        // }).catch((err) => {
+        //     dispatch({ type:'EDIT_BOOKPOST_ERROR', err });
+        // })
     } //the dispatch calls go to the reducers to be handled
 };
