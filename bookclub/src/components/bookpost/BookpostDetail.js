@@ -4,33 +4,28 @@ import { firestoreConnect } from 'react-redux-firebase'
 import { compose } from 'redux'
 import { Redirect } from 'react-router-dom'
 import moment from 'moment'
-import { deleteBookpost, editBookpost } from '../../store/actions/bookpostActions'
-
-//clicking on edit button should just take to editboookpost page.
-//dispatch action should be called in editbookpost page instead
+import { deleteBookpost } from '../../store/actions/bookpostActions'
+import { Link } from 'react-router-dom'
 
 class BookpostDetail extends Component {
     handleDeleteClick = (e) => {
         this.props.deleteBookpost(this.props.match.params.id)
         this.props.history.push('/') 
     }
-    handleEditClick = (e) => {
-        this.props.editBookpost(this.props.match.params.id)
-        // this.props.history.push('/')
-    }
-    render(){
+
+    render(){   
         const { bookpost, auth } = this.props;
         //needa delete from here //check if authorid to display the crossbtn. ternary operator?
         //{ authError ? <p>{ authError}</p> : null}
         //state.firebase.auth.uid == bookpost.authorId
         const crossbtn = <p align='right' onClick={this.handleDeleteClick} ><i className="material-icons">clear</i></p>
-        const editbtn = <p align='right' onClick={this.handleEditClick} ><i className="material-icons">edit</i></p> 
+        const editbtn = <p align='right'><Link to={'/edit/' + this.props.match.params.id}>
+            <i className="material-icons">edit</i>
+            </Link></p>
         
         if (!auth.uid) return <Redirect to='/signin' /> //route guarding
         //check if user is the author of this post. 
         if (bookpost) {
-            // console.log('bookpost2', bookpost.authorId)
-            // console.log('bookpost', auth.uid)
             return (
                 <div className="container section bookpost-detail">
                     <div className="card z-depth-0">
@@ -73,7 +68,6 @@ const mapDispatchToProps = (dispatch, ownProps) => {
     //const id = ownProps.match.params.id; 
     return {
         deleteBookpost: (id) => dispatch(deleteBookpost(id)),
-        editBookpost: (id) => dispatch(editBookpost(id))
     }
 }
 

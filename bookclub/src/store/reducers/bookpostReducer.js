@@ -14,6 +14,12 @@ const bookpostReducer = (state = initState, action) => {
         case 'DELETE_BOOKPOST_ERROR':
             console.log('deleted bookpost error', action.err)
             return state;
+        case 'EDIT_BOOKPOST':
+            console.log('edited bookpost', action.id)
+            return state;
+        case 'EDIT_BOOKPOST_ERROR':
+            console.log('edit bookpost error', action.err)
+            return state;
         default: 
             return state;
     }

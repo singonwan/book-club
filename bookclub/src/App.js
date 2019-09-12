@@ -6,6 +6,7 @@ import BookpostDetail from './components/bookpost/BookpostDetail'
 import SignIn from './components/auth/SignIn'
 import SignUp from './components/auth/SignUp'
 import CreateBookpost from './components/bookpost/CreateBookpost'
+import EditBookpost from './components/bookpost/EditBookpost'
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
           <Route path='/signin' component={SignIn} />
           <Route path='/signup' component={SignUp} />
           <Route path='/create' component={CreateBookpost} />
+          <Route path='/edit/:id' component={EditBookpost} />    
         </Switch>
       </div>
     </BrowserRouter>

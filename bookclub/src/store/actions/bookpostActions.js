@@ -35,26 +35,19 @@ export const deleteBookpost = (id) => {
     }
 }
 
-export const editBookpost = (id) => {
+export const editBookpost = (bookpost, id) => {
     return (dispatch, getState, {getFirebase, getFirestore}) => {
-        
-        //needa create an editbookpost page like createbookpost with a different state.
-        // pushing that button redirects to that page with content already existing on the thing.
-        // after editing the user can press update button
-        // notification fires and post is changed with a different timestamp too. 
-        // may needa create a new edit page or can use create page with input value to prepopulate the textbox
-
-
         const firestore = getFirestore();
-        const profile = getState().firebase.profile;
-        const authorId = getState().firebase.auth.uid;
-        // firestore.collection("bookposts").doc(id).update({
-        //     'title': '',
-        //     'content': 
-        // }).then(() => {
-        //     dispatch({ type:'EDIT_BOOKPOST', bookpost }); 
-        // }).catch((err) => {
-        //     dispatch({ type:'EDIT_BOOKPOST_ERROR', err });
-        // })
+        const title = bookpost.title;
+        const content = bookpost.content;
+        firestore.collection("bookposts").doc(id).update({
+             title: title,
+             content: content,
+             createdAt: new Date()
+        }).then(() => {
+            dispatch({ type:'EDIT_BOOKPOST', bookpost }); 
+        }).catch((err) => {
+            dispatch({ type:'EDIT_BOOKPOST_ERROR', err });
+        })
     } //the dispatch calls go to the reducers to be handled
 };

@@ -22,7 +22,9 @@ class CreateBookpost extends Component {
         this.props.history.push('/') //redirect to homepage after creating post
     }
     render() {
-        console.log('createbookpost', this.props)
+        console.log('createbookpostprops', this.props)
+        console.log('createbookpoststate', this.state)
+
         const { auth } = this.props
         if (!auth.uid) return <Redirect to='/signin' /> //route guarding
 
