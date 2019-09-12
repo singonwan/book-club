@@ -2,7 +2,7 @@
 
 creating a book club for myself and my friends to reccomend good books for each other, and update each other on what books they have read.
 
-CRUD function
+CRUD function - working!
 
 front end - react&redux
 
